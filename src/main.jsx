@@ -15,40 +15,43 @@ import Root, {
 import { action as destroyAction } from './routes/destroy';
 import Index from './routes/index';
 
-const router = createBrowserRouter([
-  {
-    path: import.meta.env.BASE_URL,
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    loader: rootLoader,
-    action: rootAction,
-    children: [
-      {
-        errorElement: <ErrorPage />,
-        children: [
-          { index: true, element: <Index /> },
-          {
-            path: 'contacts/:contactId',
-            loader: contactLoader,
-            action: contactAction,
-            element: <Contact />,
-          },
-          {
-            path: 'contacts/:contactId/edit',
-            loader: contactLoader,
-            action: editAction,
-            element: <EditContact />,
-          },
-          {
-            path: 'contacts/:contactId/destroy',
-            action: destroyAction,
-            errorElement: <div>Oops! There was an error.</div>,
-          },
-        ],
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Root />,
+      errorElement: <ErrorPage />,
+      loader: rootLoader,
+      action: rootAction,
+      children: [
+        {
+          errorElement: <ErrorPage />,
+          children: [
+            { index: true, element: <Index /> },
+            {
+              path: 'contacts/:contactId',
+              loader: contactLoader,
+              action: contactAction,
+              element: <Contact />,
+            },
+            {
+              path: 'contacts/:contactId/edit',
+              loader: contactLoader,
+              action: editAction,
+              element: <EditContact />,
+            },
+            {
+              path: 'contacts/:contactId/destroy',
+              action: destroyAction,
+              errorElement: <div>Oops! There was an error.</div>,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL }
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
