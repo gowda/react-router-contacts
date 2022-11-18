@@ -34,7 +34,7 @@ jobs:
           rm -rf .github
       - name: Copy dist to root
         run: |
-          mv -a dist/* .
+          mv -v dist/* .
           rm -rf dist
       - name: Commit the changes
         run: |
