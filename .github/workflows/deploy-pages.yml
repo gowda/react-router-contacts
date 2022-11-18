@@ -22,6 +22,8 @@ jobs:
           node-version: 16.x
       - run: npm ci
       - run: npm run build
+        env:
+          REACT_BASE: /react-router-contacts/
       - name: Setup dist
         run: echo > dist/.nojekyll
       - name: Remove all the source
