@@ -16,10 +16,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
             ${{ runner.os }}-
-      - name: Use Node.js 12.x
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 16.x
       - run: npm ci
       - run: npm run build
       - name: Setup dist
