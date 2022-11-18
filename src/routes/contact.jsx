@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
+import React from 'react';
 import { Form, useLoaderData } from 'react-router-dom';
 import Favorite from '../components/favorite';
 import { getContact, updateContact } from '../contacts';
 
 export async function action({ request, params }) {
-  let formData = await request.formData();
+  const formData = await request.formData();
   return updateContact(params.contactId, {
     favorite: formData.get('favorite') === 'true',
   });
@@ -44,7 +46,7 @@ export default function Contact() {
 
         {contact.twitter && (
           <p>
-            <a target='_blank' href={`https://twitter.com/${contact.twitter}`}>
+            <a target='_blank' href={`https://twitter.com/${contact.twitter}`} rel="noreferrer">
               {contact.twitter}
             </a>
           </p>
@@ -60,6 +62,7 @@ export default function Contact() {
             method='post'
             action='destroy'
             onSubmit={(event) => {
+              // eslint-disable-next-line no-restricted-globals
               if (!confirm('Please confirm you want to delete this record.')) {
                 event.preventDefault();
               }

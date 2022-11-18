@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   Form,
-  Link,
   NavLink,
   Outlet,
   redirect,
@@ -55,7 +54,7 @@ export default function Root() {
               }}
             />
             <div id='search-spinner' aria-hidden hidden={!searching} />
-            <div className='sr-only' aria-live='polite'></div>
+            <div className='sr-only' aria-live='polite'/>
           </Form>
           <Form method='post'>
             <button type='submit'>New</button>
@@ -69,14 +68,12 @@ export default function Root() {
                   <NavLink
                     to={`contacts/${contact.id}`}
                     className={({ isActive, isPending }) =>
+                      // eslint-disable-next-line no-nested-ternary
                       isActive ? 'active' : isPending ? 'pending' : ''
                     }
                   >
-                    {contact.first || contact.last ? (
-                      <>
-                        {contact.first} {contact.last}
-                      </>
-                    ) : (
+                    {contact.first || contact.last ? ([contact.first, contact.last].join(' '))
+                     : (
                       <>No name</>
                     )}
                   </NavLink>
